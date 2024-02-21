@@ -8,9 +8,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.Map;
 
 public class LoginStepDefs {
@@ -129,13 +132,13 @@ public class LoginStepDefs {
 
     @When("user clicks the login button for {string}")
     public void user_clicks_the_login_button(String user_type) {
-        loginPage.loginButton.click();
+        BrowserUtilities.waitForClickable(loginPage.loginButton, 10).click();
+        BrowserUtilities.justWait(5);
         switch (user_type) {
             case "client":
-                BrowserUtilities.waitForClickable(loginPage.continueButton, 10);
-                loginPage.continueButton.click();
-
-
+                if(BrowserUtilities.waitForClickable(loginPage.continueButton, 5).isDisplayed()){
+                    BrowserUtilities.doubleClick(loginPage.continueButton);
+                }
         }
     }
 

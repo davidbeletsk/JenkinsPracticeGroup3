@@ -37,10 +37,20 @@ public class Driver {
      * @return driver
      * @author nadir
      */
+    private static ChromeOptions chromeOptions;
+
     public static WebDriver getDriver(){
         if(driverPool.get()==null){
             String browserType = ConfigurationReader.getProperty("browser");
             switch (browserType.toLowerCase()){
+                case "chrome-linux":
+                    WebDriverManager.chromedriver().setup();
+                    chromeOptions = new ChromeOptions();
+                    chromeOptions.addArguments("--headless");
+                    chromeOptions.addArguments("--no-sandbox");
+                    chromeOptions.addArguments("--disable-dev-shm-usage");
+                    driverPool.set( new ChromeDriver(chromeOptions));
+                    break;
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
                     driverPool.set(new ChromeDriver());

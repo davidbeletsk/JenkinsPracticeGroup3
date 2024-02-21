@@ -46,7 +46,7 @@ public class LoginPage extends DocuportBasePage {
     @FindBy(xpath = "//button[@type='submit']")
     public WebElement loginButton;
 
-    @FindBy(xpath = "//div[@class='d-modal__footer']//button")
+    @FindBy(xpath = "//div[@class='d-modal']//div[3]//div/button")
     public WebElement continueButton;
 
     @FindBy(xpath = "*//span[text()='Batch1 Group3']")
